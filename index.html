@@ -159,6 +159,7 @@
     /* Toast notification */
     .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #333; color: white; padding: 10px 20px; border-radius: 24px; font-size: 13px; z-index: 9999; transition: transform 0.3s ease; white-space: nowrap; }
     .toast.show { transform: translateX(-50%) translateY(0); }
+  .copy-btn { background:#6b7280 !important; }
   </style>
 </head>
 <body>
@@ -781,50 +782,78 @@
   // 高德地图唤起导航
   // 逻辑：手机端优先尝试拉起高德App，失败则跳转Web版
   // 高德地图导航（带地名+坐标双保险）
-  function navTo(name, lng, lat) {
-    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  // 导航：按地名唤起高德（不依赖硬编码坐标，杜绝偏移/错值）
+  function navTo(name) {
     var n = encodeURIComponent(name);
-
+    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     if (isMobile) {
-      // 【App导航】amap://navi 导航模式，带地名和坐标
-      // poiname=目的地名称，lat/lon=坐标，dev=1表示坐标来源为高德（已转火星坐标）
-      var appUrl = 'amap://navi?poiname=' + n + '&lat=' + lat + '&lon=' + lng + '&dev=1&src=webapp';
-
-      // 【Web导航兜底】高德网页版导航
-      var webUrl = 'https://m.amap.com/navi?dest=' + lng + ',' + lat + '&destName=' + n + '&hideShadowBar=true';
-
-      // 尝试拉起高德App
-      window.location.href = appUrl;
-
-      // 3秒后若仍在当前页面，说明App未拉起，切Web版
+      window.location.href = 'amap://keywordSearch?keywords=' + n;
       setTimeout(function () {
         if (document.visibilityState === 'visible') {
-          window.location.href = webUrl;
+          window.location.href = 'https://www.amap.com/search?query=' + n;
         }
-      }, 3000);
+      }, 2500);
     } else {
-      // PC端直接打开Web版
-      window.open('https://m.amap.com/navi?dest=' + lng + ',' + lat + '&destName=' + n, '_blank');
+      window.open('https://www.amap.com/search?query=' + n, '_blank');
     }
   }
 
   // 地图搜索（用于搜酒店、充电站）
   function searchMap(keyword) {
+    var k = encodeURIComponent(keyword);
     var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    var encoded = encodeURIComponent(keyword);
     if (isMobile) {
-      // 手机上用高德App搜索
-      window.location.href = 'amap://keywordSearch?keywords=' + encoded;
-      setTimeout(function() {
-        setTimeout(function() {
-          if (document.visibilityState === 'visible') {
-            window.location.href = 'https://m.amap.com/search?query=' + encoded + '&key=';
-          }
-        }, 2000);
-      }, 100);
+      window.location.href = 'amap://keywordSearch?keywords=' + k;
+      setTimeout(function () {
+        if (document.visibilityState === 'visible') {
+          window.location.href = 'https://www.amap.com/search?query=' + k;
+        }
+      }, 2500);
     } else {
-      window.open('https://m.amap.com/search?query=' + encoded + '&key=', '_blank');
+      window.open('https://www.amap.com/search?query=' + k, '_blank');
     }
+  }
+
+  // 复制地名兜底（地图拉不起时，手动粘贴到高德/百度）
+  function copyName(name) {
+    function done() { showToast('已复制：' + name + '（可粘贴到高德/百度）'); }
+    function fail() { showToast('复制失败，请长按选择'); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(name).then(done).catch(function () { legacyCopy(name, done, fail); });
+    } else {
+      legacyCopy(name, done, fail);
+    }
+  }
+  function legacyCopy(text, done, fail) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.top = '-9999px';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy') ? done() : fail(); } catch (e) { fail(); }
+    document.body.removeChild(ta);
+  }
+
+  // 自动给每个导航/搜索按钮“隔壁”包一个复制按钮（无需逐个改 HTML）
+  function injectCopyButtons() {
+    document.querySelectorAll('.nav-btn').forEach(function (btn) {
+      var attr = btn.getAttribute('onclick') || '';
+      var m = attr.match(/navTo\(\s*'([^']+)'|searchMap\(\s*'([^']+)'/);
+      var name = (m ? (m[1] || m[2]) : btn.textContent || '目的地').trim();
+      var copy = document.createElement('button');
+      copy.className = 'nav-btn copy-btn';
+      copy.type = 'button';
+      copy.textContent = '📋复制';
+      copy.setAttribute('onclick', "copyName('" + name.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "')");
+      var wrap = document.createElement('span');
+      wrap.style.cssText = 'display:inline-flex;gap:4px;align-items:center;vertical-align:middle;';
+      btn.parentNode.insertBefore(wrap, btn);
+      wrap.appendChild(btn);
+      wrap.appendChild(copy);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectCopyButtons);
+  } else {
+    injectCopyButtons();
   }
 
   // Toast提示

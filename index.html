@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🚀 海南5天4夜自驾攻略 2026.7.21-25</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --bg: #f4f7ff;
+      --card: #ffffff;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --accent: #ff6b35;
+      --accent2: #00c853;
+      --warning: #ff9800;
+      --border: #e5e7eb;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    .hero {
+      background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1976d2 100%);
+      color: white;
+      padding: 32px 20px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '🚀';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 80px;
+      opacity: 0.15;
+    }
+    .hero-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; margin-bottom: 10px; }
+    .hero h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .hero .subtitle { font-size: 14px; opacity: 0.85; margin-bottom: 16px; }
+    .hero-stats { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 8px 12px; font-size: 12px; flex: 1; min-width: 70px; }
+    .stat .val { font-size: 18px; font-weight: 700; display: block; }
+
+    .constraint-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px 16px 0; margin-top: -20px; position: relative; z-index: 2; }
+    .constraint-card { background: var(--card); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); border-left: 4px solid var(--primary); }
+    .constraint-card.accent-orange { border-left-color: var(--accent); }
+    .constraint-card.accent-green { border-left-color: var(--accent2); }
+    .constraint-card.accent-warning { border-left-color: var(--warning); }
+    .constraint-card h3 { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .constraint-card .value { font-size: 15px; font-weight: 700; }
+    .constraint-card .sub { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+    .container { padding: 16px; max-width: 600px; margin: 0 auto; }
+
+    .route-map { background: var(--card); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); }
+    .route-map h2 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+    .route-dots { display: flex; align-items: center; justify-content: space-between; position: relative; padding: 0 4px; }
+    .route-dots::before { content: ''; position: absolute; top: 14px; left: 24px; right: 24px; height: 2px; background: linear-gradient(to right, #1a73e8, #ff6b35); border-radius: 1px; }
+    .route-dot { display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative; z-index: 1; }
+    .route-dot .icon { width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+    .route-dot .icon.orange { background: var(--accent); }
+    .route-dot .icon.green { background: var(--accent2); }
+    .route-dot .label { font-size: 10px; color: var(--text-light); text-align: center; white-space: nowrap; }
+
+    .section-title { font-size: 15px; font-weight: 700; padding: 16px 0 10px; display: flex; align-items: center; gap: 8px; }
+    .section-title .icon { font-size: 18px; }
+
+    .day-card { background: var(--card); border-radius: var(--radius); margin-bottom: 16px; box-shadow: var(--shadow); overflow: hidden; }
+    .day-header { padding: 14px 16px; color: white; display: flex; align-items: center; gap: 12px; }
+    .day-header h3 { font-size: 15px; font-weight: 700; }
+    .day-header .date { font-size: 12px; opacity: 0.85; }
+    .day-header.d1 { background: linear-gradient(135deg, #1565c0, #1976d2); }
+    .day-header.d2 { background: linear-gradient(135deg, #7b1fa2, #9c27b0); }
+    .day-header.d3 { background: linear-gradient(135deg, #e65100, #f57c00); }
+    .day-header.d4 { background: linear-gradient(135deg, #b71c1c, #e53935); }
+    .day-header.d5 { background: linear-gradient(135deg, #1b5e20, #388e3c); }
+    .day-badge { background: rgba(255,255,255,0.2); border-radius: 8px; padding: 4px 10px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+
+    .day-body { padding: 0; }
+    .timeline-item { display: flex; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); position: relative; }
+    .timeline-item:last-child { border-bottom: none; }
+    .time-col { min-width: 44px; text-align: right; }
+    .time { font-size: 12px; font-weight: 700; color: var(--primary); }
+    .time .ampm { font-size: 10px; font-weight: 400; color: var(--text-light); display: block; }
+    .dot-col { position: relative; z-index: 1; flex-shrink: 0; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); border: 2px solid var(--primary); margin-top: 4px; }
+    .dot.active { background: var(--primary); }
+    .dot.orange { border-color: var(--accent); background: var(--accent); }
+    .dot.green { border-color: var(--accent2); background: var(--accent2); }
+    .dot.warning { border-color: var(--warning); background: var(--warning); }
+    .dot.red { border-color: #e53935; background: #e53935; }
+    .content-col { flex: 1; min-width: 0; }
+    .content-col .title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .content-col .desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+    .content-col .detail { font-size: 12px; color: #555; margin-top: 4px; background: #f9fafb; border-radius: 6px; padding: 6px 8px; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 4px; background: #1a73e8; color: white; border: none; border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer; text-decoration: none; margin-top: 6px; font-weight: 500; margin-right: 4px; }
+    .nav-btn:hover { background: #1557b0; }
+    .nav-btn.orange { background: var(--accent); }
+    .nav-btn.orange:hover { background: #e55a1f; }
+    .nav-btn.green { background: var(--accent2); }
+    .nav-btn.green:hover { background: #00a844; }
+    .nav-btn.red { background: #e53935; }
+    .nav-btn.red:hover { background: #c62828; }
+    .nav-btn:disabled { background: #ccc; cursor: not-allowed; }
+    .tag { display: inline-block; background: #e8f0fe; color: #1a56db; border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 500; margin-right: 4px; }
+    .tag.orange { background: #fff3e0; color: #e65100; }
+    .tag.green { background: #e8f5e9; color: #2e7d32; }
+    .tag.red { background: #ffebee; color: #c62828; }
+
+    .alert { border-radius: var(--radius); padding: 14px 16px; margin: 0 16px 12px; font-size: 13px; }
+    .alert.warning { background: #fff8e1; border-left: 4px solid var(--warning); color: #5d4037; }
+    .alert.danger { background: #fce4ec; border-left: 4px solid #e53935; color: #b71c1c; }
+    .alert.success { background: #e8f5e9; border-left: 4px solid var(--accent2); color: #1b5e20; }
+
+    .rocket-section { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; color: white; }
+    .rocket-header { padding: 16px; background: rgba(255,255,255,0.05); display: flex; align-items: center; gap: 10px; }
+    .rocket-header .icon { font-size: 24px; }
+    .rocket-header h2 { font-size: 16px; font-weight: 700; }
+    .rocket-header .sub { font-size: 12px; opacity: 0.7; }
+    .rocket-body { padding: 16px; }
+    .spot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .spot-card { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); }
+    .spot-card.primary { grid-column: 1 / -1; background: rgba(255,107,53,0.15); border-color: rgba(255,107,53,0.3); }
+    .spot-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+    .spot-card p { font-size: 11px; opacity: 0.75; line-height: 1.5; }
+    .spot-card .badge { display: inline-block; background: rgba(255,107,53,0.3); border-radius: 4px; padding: 1px 6px; font-size: 10px; margin-bottom: 4px; }
+    .spot-card .badge.tip { background: rgba(0,200,83,0.2); color: #69f0ae; }
+
+    .strategy-box { background: var(--card); border-radius: var(--radius); margin-bottom: 16px; padding: 16px; box-shadow: var(--shadow); }
+    .strategy-box h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+    .step { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+    .step-num { width: 20px; height: 20px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .step-text { font-size: 13px; flex: 1; }
+    .step-text .bold { font-weight: 600; }
+
+    .checklist { background: var(--card); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); }
+    .checklist h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .check-item { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .check-item:last-child { border-bottom: none; }
+    .check-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+    .check-group-title { font-size: 12px; font-weight: 700; color: var(--text-light); margin: 10px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .charge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .charge-card { background: #f0fdf4; border-radius: 10px; padding: 12px; border: 1px solid #bbf7d0; }
+    .charge-card h4 { font-size: 12px; font-weight: 700; color: #166534; margin-bottom: 4px; }
+    .charge-card p { font-size: 11px; color: #166534; opacity: 0.8; }
+
+    .footer { text-align: center; padding: 24px 16px; font-size: 12px; color: var(--text-light); }
+    .footer .tips { background: #f0f9ff; border-radius: var(--radius); padding: 12px; margin-bottom: 16px; font-size: 12px; color: #1e40af; }
+
+    .float-nav { position: fixed; bottom: 16px; right: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 100; }
+    .float-btn { width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 20px; cursor: pointer; box-shadow: 0 4px 16px rgba(26,115,232,0.4); display: flex; align-items: center; justify-content: center; text-decoration: none; }
+    .float-btn.orange { background: var(--accent); box-shadow: 0 4px 16px rgba(255,107,53,0.4); }
+
+    /* Toast notification */
+    .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #333; color: white; padding: 10px 20px; border-radius: 24px; font-size: 13px; z-index: 9999; transition: transform 0.3s ease; white-space: nowrap; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🚗 4大2小 · 极氪7X · 自驾</div>
+  <h1>海南5天4夜自驾攻略</h1>
+  <div class="subtitle">2026年7月21日（周二）— 7月25日（周六）</div>
+  <div class="hero-stats">
+    <div class="stat"><span class="val">435km</span>开平→徐闻</div>
+    <div class="stat"><span class="val">265km</span>三亚→文昌</div>
+    <div class="stat"><span class="val">🚀 20:00</span>火箭发射</div>
+    <div class="stat"><span class="val">5天4夜</span>环岛之旅</div>
+  </div>
+</div>
+
+<!-- CONSTRAINTS -->
+<div class="constraint-bar">
+  <div class="constraint-card">
+    <h3>🚢 去程船票</h3>
+    <div class="value">14:00 开航</div>
+    <div class="sub">徐闻港→新海港 · 进港 11:00-12:00</div>
+  </div>
+  <div class="constraint-card accent-orange">
+    <h3>🚢 回程船票</h3>
+    <div class="value">16:40 开航</div>
+    <div class="sub">新海港→徐闻港 · 进港 14:40-15:40</div>
+  </div>
+  <div class="constraint-card accent-warning">
+    <h3>🚀 火箭发射</h3>
+    <div class="value">7/24 20:00</div>
+    <div class="sub">海南商业航天发射场（东郊椰林）</div>
+  </div>
+  <div class="constraint-card accent-green">
+    <h3>🔋 续航提示</h3>
+    <div class="value">极氪7X 75度</div>
+    <div class="sub">高速满载空调约300km，需中途补电</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ROUTE MAP -->
+  <div class="route-map" style="margin-top: 16px;">
+    <h2>🗺️ 行程总览</h2>
+    <div class="route-dots">
+      <div class="route-dot"><div class="icon">🏠</div><div class="label">开平<br>7/21早</div></div>
+      <div class="route-dot"><div class="icon orange">⛴️</div><div class="label">渡海</div></div>
+      <div class="route-dot"><div class="icon">🏝️</div><div class="label">海口<br>7/21晚</div></div>
+      <div class="route-dot"><div class="icon orange">🛣️</div><div class="label">万宁最美<br>旅游公路</div></div>
+      <div class="route-dot"><div class="icon">🌴</div><div class="label">三亚<br>7/22-23晚</div></div>
+      <div class="route-dot"><div class="icon orange">🚀</div><div class="label">文昌<br>7/24晚</div></div>
+      <div class="route-dot"><div class="icon green">🏠</div><div class="label">开平<br>7/25晚</div></div>
+    </div>
+  </div>
+
+  <!-- ========== DAY 1 ========== -->
+  <div class="section-title"><span class="icon">📅</span> Day 1 · 7月21日（周二）出发日</div>
+  <div class="day-card">
+    <div class="day-header d1">
+      <div><h3>出发日 — 渡海</h3><div class="date">开平 → 琼州海峡 → 海口</div></div>
+      <div class="day-badge">Day 1</div>
+    </div>
+    <div class="day-body">
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">06:30</div></div>
+        <div class="dot-col"><div class="dot active"></div></div>
+        <div class="content-col">
+          <div class="title">起床装车，极氪7X满电出发</div>
+          <div class="desc">预约夜间谷时充电，出发前确保续航≥95%</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">07:00</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">极氪满电正式出发</div>
+          <div class="desc">导航：徐闻港（行程435km，约5.5h）</div>
+          <div class="detail"><span class="tag">必做</span>出发前在高德地图App内缓存离线地图（海南部分区域信号弱）</div>
+          <button class="nav-btn" onclick="navTo('徐闻港','110.4066','20.2593')">🗺️ 导航到徐闻港</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">09:30</div><div class="time ampm">约2.5h后</div></div>
+        <div class="dot-col"><div class="dot orange"></div></div>
+        <div class="content-col">
+          <div class="title">⚡ 必须补电：阳江/阳西服务区</div>
+          <div class="desc">极氪7X 75度高速满载空调约300km，435km必须中途补电一次</div>
+          <div class="detail">国标快充，约30分钟充至80%，休息、简餐</div>
+          <button class="nav-btn orange" onclick="navTo('阳江服务区充电站','111.89','21.86')">🗺️ 导航阳江服务区</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">11:00</div><div class="time ampm">进港开始</div></div>
+        <div class="dot-col"><div class="dot warning"></div></div>
+        <div class="content-col">
+          <div class="title">🚢 抵达徐闻港，进港</div>
+          <div class="desc">进港时间窗口 11:00-12:00，建议11:00-11:30到</div>
+          <div class="detail">船票：粤海铁徐闻港公众号购买，凭车牌+订单，无需取票<br>🚨 船14:00开，错过不等！</div>
+          <button class="nav-btn" onclick="navTo('徐闻港','110.4066','20.2593')">🗺️ 导航到徐闻港</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">14:00</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🚢 渡海：徐闻港 → 新海港</div>
+          <div class="desc">航程约1.5小时，可在船上补觉/吃简餐</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">15:30</div><div class="time ampm">约到港</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🛬 抵达海口新海港，下船取车</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">16:00</div><div class="time ampm">约到店</div></div>
+        <div class="dot-col"><div class="dot green"></div></div>
+        <div class="content-col">
+          <div class="title">🏨 入住海口酒店（滨海大道沿线）</div>
+          <div class="desc">推荐：海口华彩洲际/海口香格里拉/海口万豪</div>
+          <button class="nav-btn green" onclick="searchMap('海口滨海大道酒店')">🗺️ 搜海口滨海大道酒店</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">16:30</div><div class="time ampm">下午可选</div></div>
+        <div class="dot-col"><div class="dot orange"></div></div>
+        <div class="content-col">
+          <div class="title">🔥 火山口国家地质公园（世界遗产·海口必打卡）</div>
+          <div class="desc">中国唯一热带海岛城市休眠火山，登顶俯瞰琼州海峡，孩子超爱（火山地貌探险）</div>
+          <div class="detail"><span class="tag">距市区约20km</span>门票约¥50，建议游览1-1.5h</div>
+          <button class="nav-btn orange" onclick="navTo('火山口国家地质公园','110.2707','19.9319')">🗺️ 导航火山口公园</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">晚上</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🍜 晚餐：海南粉 + 清补凉（必吃！）</div>
+          <div class="desc">文昌鸡/临高乳猪 + 清补凉（海南消暑甜品王），4大2小约¥150-200</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">晚上</div></div>
+        <div class="dot-col"><div class="dot green"></div></div>
+        <div class="content-col">
+          <div class="title">🌃 骑楼老街夜游（南洋风情·免费）</div>
+          <div class="desc">海口最负盛名的历史文化街区，夜景比白天更美，小吃摊位林立，边走边吃孩子超开心</div>
+          <button class="nav-btn green" onclick="navTo('骑楼老街','110.3492','20.0303')">🗺️ 导航骑楼老街</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== DAY 2 ========== -->
+  <div class="section-title"><span class="icon">📅</span> Day 2 · 7月22日（周三）精华自驾日</div>
+  <div class="day-card">
+    <div class="day-header d2">
+      <div><h3>海口 → 万宁最美旅游公路 → 三亚</h3><div class="date">G98东线 · 环岛旅游公路精华段</div></div>
+      <div class="day-badge">Day 2</div>
+    </div>
+    <div class="day-body">
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">08:00</div></div>
+        <div class="dot-col"><div class="dot active"></div></div>
+        <div class="content-col">
+          <div class="title">🍳 酒店早餐后出发，导航「石梅湾」</div>
+          <div class="desc">海口→石梅湾约150km，走G98东线高速，约1h40min</div>
+          <button class="nav-btn" onclick="navTo('石梅湾','110.2151','18.6423')">🗺️ ① 导航石梅湾</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">10:00</div><div class="time ampm">约到</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🏖️ 石梅湾 · 海南最美海湾之一</div>
+          <div class="desc">白色沙滩+清澈海水，孩子挖沙玩水，约玩1h</div>
+          <button class="nav-btn" onclick="navTo('石梅湾','110.2151','18.6423')">🗺️ ① 石梅湾</button>
+          <button class="nav-btn orange" onclick="navTo('南燕湾观景台','110.2348','18.6750')" style="margin-left:4px;">🗺️ ② 南燕湾</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">11:30</div><div class="time ampm">约到</div></div>
+        <div class="dot-col"><div class="dot orange"></div></div>
+        <div class="content-col">
+          <div class="title">🛣️ ⭐ 万宁最美旅游公路精华自驾</div>
+          <div class="desc">沿省道S365继续南行：南燕湾观景台 → 神州半岛灯塔 → 大花角，约25km</div>
+          <div class="detail"><span class="tag orange">不走高速，走省道</span>限速40-60km/h，建议每站停20-30分钟</div>
+          <button class="nav-btn orange" onclick="navTo('南燕湾观景台','110.2348','18.6750')">🗺️ ② 南燕湾</button>
+          <button class="nav-btn orange" onclick="navTo('神州半岛泰悦居','110.2325','18.8209')" style="margin-left:4px;">🗺️ ③ 灯塔</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">13:30</div><div class="time ampm">约到</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🔱 神州半岛灯塔 · 出片打卡</div>
+          <div class="desc">跨海大桥+灯塔同框，海南最网红打卡点，约玩30min</div>
+          <button class="nav-btn orange" onclick="navTo('神州半岛泰悦居','110.2325','18.8209')">🗺️ ③ 导航灯塔</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">14:30</div><div class="time ampm">约到</div></div>
+        <div class="dot-col"><div class="dot orange"></div></div>
+        <div class="content-col">
+          <div class="title">🏖️ 大花角 · 徒步至鹅卵石海湾</div>
+          <div class="desc">海南唯一鹅卵石海湾，宁静小众，拍照超美，约玩40min</div>
+          <button class="nav-btn orange" onclick="navTo('大花角','110.1755','18.8711')">🗺️ ④ 大花角</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">15:30</div><div class="time ampm">约到</div></div>
+        <div class="dot-col"><div class="dot green"></div></div>
+        <div class="content-col">
+          <div class="title">🚗 大花角 → G98东线高速 → 三亚</div>
+          <div class="desc">约130km，约1.5h（含高速）</div>
+          <button class="nav-btn green" onclick="navTo('三亚湾','109.5138','18.2543')">🗺️ 导航三亚湾</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">17:00</div><div class="time ampm">约到店</div></div>
+        <div class="dot-col"><div class="dot green"></div></div>
+        <div class="content-col">
+          <div class="title">🏨 入住三亚酒店 + 小休</div>
+          <div class="desc">推荐：亚特兰蒂斯/理文索菲特/康年酒店/三亚湾红树林</div>
+          <button class="nav-btn green" onclick="searchMap('三亚湾酒店')">🗺️ 搜三亚湾酒店</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">18:00</div><div class="time ampm">日落时间</div></div>
+        <div class="dot-col"><div class="dot warning"></div></div>
+        <div class="content-col">
+          <div class="title">🌅 三亚湾椰梦长廊日落</div>
+          <div class="desc">全球最美日落之一，免费！趁光线好先看日落再吃晚饭</div>
+          <button class="nav-btn" onclick="navTo('椰梦长廊','109.5138','18.2543')">🗺️ 导航椰梦长廊</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">19:30</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🦞 晚餐：第一市场/鸿港市场海鲜</div>
+          <div class="desc">到店购海鲜+加工 combo，4大2小约¥300-500</div>
+          <button class="nav-btn" onclick="navTo('第一市场','109.5020','18.2841')">🗺️ 导航第一市场</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== DAY 3 ========== -->
+  <div class="section-title"><span class="icon">📅</span> Day 3 · 7月23日（周四）三亚亲子日</div>
+  <div class="day-card">
+    <div class="day-header d3">
+      <div><h3>三亚全天亲子休闲</h3><div class="date">轻松模式 · 孩子为主</div></div>
+      <div class="day-badge">Day 3</div>
+    </div>
+    <div class="day-body">
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">09:00</div><div class="time ampm">上午</div></div>
+        <div class="dot-col"><div class="dot active"></div></div>
+        <div class="content-col">
+          <div class="title">🏖️ 亚龙湾 · 天下第一湾挖沙戏水</div>
+          <div class="desc">白沙滩+清澈海水，孩子可玩3-4小时，海水质量最佳</div>
+          <button class="nav-btn" onclick="navTo('亚龙湾海滩','109.6414','18.2292')">🗺️ 导航亚龙湾</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">12:00</div></div>
+        <div class="dot-col"><div class="dot orange"></div></div>
+        <div class="content-col">
+          <div class="title">🕶️ 酒店午休 / 泳池放松</div>
+          <div class="desc">下午紫外线强，酒店休息，为Day4储备体力，约2h</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">14:30</div><div class="time ampm">下午</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🧸 可选景点（选一个）</div>
+          <div class="desc">天涯小镇：文艺清新，蓝白小镇拍照超美<br>西岛：潜水/海上项目，亲子友好<br>南山寺：108米海上观音，震撼</div>
+          <button class="nav-btn" onclick="navTo('天涯小镇','109.4830','18.2011')">🗺️ 天涯小镇</button>
+          <button class="nav-btn" onclick="navTo('西岛旅游区','109.4667','18.2269')" style="margin-left:4px;">🗺️ 西岛</button>
+          <button class="nav-btn" onclick="navTo('南山寺','109.9412','18.2176')" style="margin-left:4px;">🗺️ 南山寺</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">晚上</div></div>
+        <div class="dot-col"><div class="dot green"></div></div>
+        <div class="content-col">
+          <div class="title">⚡ 极氪满电 / 整理行李</div>
+          <div class="desc">晚8点前在酒店停车场充电至满，为Day4长距离出发准备</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== DAY 4 ========== -->
+  <div class="section-title"><span class="icon">📅</span> Day 4 · 7月24日（周五）火箭发射日 🚀</div>
+
+  <div class="alert danger">
+    <strong>⚠️ 今日核心任务：13:30出发，20:00看火箭！</strong><br>
+    <span style="font-size:12px;">文昌有两个发射场，本次是商业发射（东郊椰林），<strong>不要去龙楼镇！</strong></span>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header d4">
+      <div><h3>🚀 火箭发射日 — 文昌东郊椰林</h3><div class="date">7/24 20:00 海南商业航天发射场</div></div>
+      <div class="day-badge" style="background:rgba(255,107,53,0.3);">Day 4</div>
+    </div>
+    <div class="day-body">
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">09:00</div><div class="time ampm">上午</div></div>
+        <div class="dot-col"><div class="dot active"></div></div>
+        <div class="content-col">
+          <div class="title">🏖️ 亚龙湾/海棠湾慢节奏 · 休整</div>
+          <div class="desc">不赶景点，泡酒店/海边挖沙，养足精神</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">12:30</div><div class="time ampm">中午</div></div>
+        <div class="dot-col"><div class="dot orange"></div></div>
+        <div class="content-col">
+          <div class="title">⚡ 极氪出发前补满电</div>
+          <div class="desc">三亚酒店停车场快充，约30-40分钟充至95%+</div>
+          <button class="nav-btn orange" onclick="searchMap('三亚湾充电站')">🗺️ 搜附近充电站</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">13:30</div></div>
+        <div class="dot-col"><div class="dot red"></div></div>
+        <div class="content-col">
+          <div class="title">🚗 满电出发，导航「椰林1号观景台」</div>
+          <div class="desc">G98东线北行 → 陵水 → 万宁 → 琼海 → 文昌东郊椰林方向<br>全程约265km，约3-3.5h</div>
+          <div class="detail"><span class="tag red">⚠️ 导航搜"椰林1号观景台"，不要去龙楼镇（那是国家队发射场）</span></div>
+          <button class="nav-btn red" onclick="navTo('椰林1号观景台','110.7834','19.6485')">🗺️ 导航到椰林1号观景台</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">17:00</div><div class="time ampm">约到</div></div>
+        <div class="dot-col"><div class="dot orange"></div></div>
+        <div class="content-col">
+          <div class="title">🌴 抵达东郊椰林，找车位占位</div>
+          <div class="desc">车位极少！建议先到椰林1号看车位，有则停，无则立即转石头公园</div>
+          <div class="detail"><span class="tag orange">备选</span>石头公园（堂洪港）约3km外 — 300车位+有厕所+孩子可玩石头</div>
+          <button class="nav-btn orange" onclick="navTo('石头公园堂洪港','110.8350','19.6810')">🗺️ 备选导航石头公园</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">17:30</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">⏳ 占位等候（2-3小时）</div>
+          <div class="desc">野餐垫铺好 · 驱蚊+防晒 · 干粮+水备好 · 充电宝满电</div>
+          <div class="detail"><span class="tag orange">装备清单</span>驱蚊液 · 防晒霜 · 折叠椅/野餐垫 · 干粮 · 充电宝 · 相机/手机稳定器</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">20:00</div></div>
+        <div class="dot-col"><div class="dot warning"></div></div>
+        <div class="content-col">
+          <div class="title">🚀🚀🚀 火箭升空！！！</div>
+          <div class="desc">点火升空约3-5分钟，拍照/录像！注意安全，不要靠发射场过近</div>
+          <div class="detail">具体时间以官方最终公告为准，可能因天气等因素调整</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">21:30</div></div>
+        <div class="dot-col"><div class="dot green"></div></div>
+        <div class="content-col">
+          <div class="title">🏨 驾车前往文昌市区住宿</div>
+          <div class="desc">文城镇约30km，约40-50分钟（发射后东郊会堵）</div>
+          <div class="detail"><span class="tag green">🚨 今晚文昌房源极度紧张，现在立刻预订！</span></div>
+          <button class="nav-btn green" onclick="searchMap('文昌市区酒店')">🗺️ 搜文昌市区酒店</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ROCKET SPOTS ========== -->
+  <div class="section-title"><span class="icon">🚀</span> 商业发射观礼点全览</div>
+  <div class="rocket-section">
+    <div class="rocket-header">
+      <div class="icon">🚀</div>
+      <div><h2>7/24 商业发射观礼指南</h2><div class="sub">海南商业航天发射场（东郊椰林）· 20:00发射</div></div>
+    </div>
+    <div class="rocket-body">
+      <div class="spot-grid">
+        <div class="spot-card primary">
+          <div class="badge">🥇 首选</div>
+          <h4>🌴 椰林1号观景台</h4>
+          <p>距发射场约5km · 无卫生间 · 车位极少 · 椰林+海景+火箭同框，风景最美</p>
+          <button class="nav-btn" onclick="navTo('椰林1号观景台','110.7834','19.6485')" style="margin-top:8px;background:#ff6b35;">🗺️ 高德导航</button>
+        </div>
+        <div class="spot-card">
+          <div class="badge">🥈 有娃首选</div>
+          <h4>🪨 石头公园（堂洪港）</h4>
+          <p>距发射场7-8km · 300车位+有厕所 · 千万年巨石上观礼，孩子可边玩边等</p>
+          <button class="nav-btn" onclick="navTo('石头公园堂洪港','110.8350','19.6810')" style="margin-top:6px;background:#ff6b35;font-size:11px;padding:4px 8px;">🗺️ 导航</button>
+        </div>
+        <div class="spot-card">
+          <div class="badge">🥉 不挤之选</div>
+          <h4>🌉 清澜大桥桥头公园</h4>
+          <p>车位充足不堵 · 有卫生间 · 可拍火箭+大桥大景，发射后快速撤离</p>
+          <button class="nav-btn" onclick="navTo('清澜大桥桥头公园','110.8190','19.5860')" style="margin-top:6px;background:#ff6b35;font-size:11px;padding:4px 8px;">🗺️ 导航</button>
+        </div>
+        <div class="spot-card">
+          <div class="badge tip">付费·效果最佳</div>
+          <h4>🏟️ 文昌瑶光观礼平台</h4>
+          <p>距商业发射1.5km · ¥388/人 · 官方认证最佳观礼点</p>
+        </div>
+        <div class="spot-card">
+          <div class="badge tip">付费·亲子友好</div>
+          <h4>🔬 文昌航天科普中心</h4>
+          <p>有卫生间+大屏幕直播 · ¥50/人 · 大停车场 · 带2小体验好</p>
+        </div>
+        <div class="spot-card">
+          <div class="badge">🌟 摄影推荐</div>
+          <h4>⛰️ 铜鼓岭景区</h4>
+          <p>"琼东第一峰"海拔338m · ¥45/人 · 350车位 · 最美火箭观测点</p>
+          <button class="nav-btn" onclick="navTo('铜鼓岭景区','110.9677','19.7228')" style="margin-top:6px;background:#ff6b35;font-size:11px;padding:4px 8px;">🗺️ 导航</button>
+        </div>
+      </div>
+      <div class="strategy-box" style="margin-top:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+        <h3 style="color:white;">🎯 当日决策策略</h3>
+        <div class="step" style="margin-bottom:6px;">
+          <div class="step-num" style="background:#ff6b35;">1</div>
+          <div class="step-text" style="color:rgba(255,255,255,0.9);font-size:12px;">17:00前到东郊椰林 → 先去<strong>椰林1号</strong>看车位</div>
+        </div>
+        <div class="step" style="margin-bottom:6px;">
+          <div class="step-num" style="background:#ff6b35;">2</div>
+          <div class="step-text" style="color:rgba(255,255,255,0.9);font-size:12px;">有车位 → 停好占位 ｜ 无车位/已满 → 直奔<strong>石头公园</strong>（3km外，300车位+厕所）</div>
+        </div>
+        <div class="step" style="margin-bottom:0;">
+          <div class="step-num" style="background:#ff6b35;">3</div>
+          <div class="step-text" style="color:rgba(255,255,255,0.9);font-size:12px;">20:00 🚀 发射！</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert warning">
+    <strong>📞 出发前必做：</strong>微信搜索「海口本地宝」回复「火箭」确认发射时间，或联系客服 <strong>17278858690</strong>（微信备注"火箭"）
+  </div>
+
+  <!-- ========== DAY 5 ========== -->
+  <div class="section-title"><span class="icon">📅</span> Day 5 · 7月25日（周六）木兰湾风车海岸 → 返程</div>
+  <div class="day-card">
+    <div class="day-header d5">
+      <div><h3>文昌 → 木兰湾风车海岸 → 海口 → 开平</h3><div class="date">🌊 亚洲第一灯塔 + 风车海岸 + 渡海返程</div></div>
+      <div class="day-badge">Day 5</div>
+    </div>
+    <div class="day-body">
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">08:00</div></div>
+        <div class="dot-col"><div class="dot active"></div></div>
+        <div class="content-col">
+          <div class="title">🏨 退房，文昌老爸茶早餐</div>
+          <div class="desc">本地人最爱的早餐文化，平价热闹，品尝文昌鸡粉/老爸茶</div>
+          <button class="nav-btn" onclick="searchMap('文昌老爸茶')">🗺️ 搜附近老爸茶</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">08:30</div></div>
+        <div class="dot-col"><div class="dot green"></div></div>
+        <div class="content-col">
+          <div class="title">🚗 出发前往木兰湾风车海岸</div>
+          <div class="desc">海南环岛旅游公路文昌段精华 · 约50km，约50分钟</div>
+          <button class="nav-btn green" onclick="navTo('木兰湾','110.6300','19.9800')">🗺️ 导航到木兰湾</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">09:20</div><div class="time ampm">约到</div></div>
+        <div class="dot-col"><div class="dot orange"></div></div>
+        <div class="content-col">
+          <div class="title">🌊🌬️🌅 木兰湾风车海岸游玩（约2.5h）</div>
+          <div class="desc">亚洲第一高航标灯塔（72.12米）+ 巨大风车沿海岸一字排开 + 湛蓝海水 + 礁石沙滩</div>
+          <div class="detail"><span class="tag green">免费</span>有停车场 · 摄影效果极佳<br>⚠️ 12:00前必须出发去港口！</div>
+          <button class="nav-btn orange" onclick="navTo('木兰灯塔','110.6278','19.9764')">🗺️ 导航木兰灯塔</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">12:00</div></div>
+        <div class="dot-col"><div class="dot warning"></div></div>
+        <div class="content-col">
+          <div class="title">🚗 出发前往海口新海港</div>
+          <div class="desc">约110km，约1h20min</div>
+          <button class="nav-btn" onclick="navTo('海口新海港','110.2447','20.0252')">🗺️ 导航新海港</button>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">13:30</div><div class="time ampm">约到</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🛳️ 抵达新海港，简餐</div>
+          <div class="desc">不要吃太饱上船，防止晕船不适</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">14:40</div><div class="time ampm">进港</div></div>
+        <div class="dot-col"><div class="dot red"></div></div>
+        <div class="content-col">
+          <div class="title">🚢 最晚14:40前入港！</div>
+          <div class="desc">航班HA1640，16:40开航 · 进港窗口14:40-15:40 · 15:40停止检票</div>
+          <div class="detail">凭身份证+订单登船，无需取票</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">16:40</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">⛴️ 渡海：海口新海港 → 徐闻港</div>
+          <div class="desc">航程约1.5小时</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">18:10</div></div>
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="content-col">
+          <div class="title">🛬 抵达徐闻港，下船</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-col"><div class="time">18:30</div></div>
+        <div class="dot-col"><div class="dot green"></div></div>
+        <div class="content-col">
+          <div class="title">🏠 驾车返回开平（约435km，约5h）</div>
+          <div class="desc">约23:30到家！旅程圆满结束 🎉</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARGE SECTION -->
+  <div class="section-title"><span class="icon">⚡</span> 充电攻略</div>
+  <div class="strategy-box">
+    <div class="charge-grid">
+      <div class="charge-card">
+        <h4>⚡ Day1 广东境内</h4>
+        <p>阳江/阳西服务区（G15沈海高速）<br>国标快充，约30分钟充至80%</p>
+        <button class="nav-btn" onclick="navTo('阳江服务区充电站','111.89','21.86')" style="margin-top:6px;font-size:11px;padding:4px 8px;">🗺️ 导航</button>
+      </div>
+      <div class="charge-card">
+        <h4>⚡ Day3 三亚晚</h4>
+        <p>三亚酒店停车场快充桩<br>慢充一夜，次日满电出发</p>
+        <button class="nav-btn" onclick="searchMap('三亚湾充电站')" style="margin-top:6px;font-size:11px;padding:4px 8px;">🗺️ 搜附近</button>
+      </div>
+      <div class="charge-card">
+        <h4>⚡ Day4 文昌前</h4>
+        <p>G98东线：琼海/万宁/陵水服务区<br>每隔50-80km有充电桩</p>
+        <button class="nav-btn" onclick="navTo('琼海服务区充电站','110.5942','19.2329')" style="margin-top:6px;font-size:11px;padding:4px 8px;">🗺️ 琼海服务区</button>
+      </div>
+      <div class="charge-card">
+        <h4>⚡ Day5 文昌出发前</h4>
+        <p>文昌市区快充站<br>可选，约30分钟补电</p>
+        <button class="nav-btn" onclick="searchMap('文昌市区充电站')" style="margin-top:6px;font-size:11px;padding:4px 8px;">🗺️ 搜附近</button>
+      </div>
+    </div>
+    <p style="margin-top:10px;font-size:12px;color:#6b7280;">可用App：极氪APP / 加电APP / 南方电网「南网在线」</p>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section-title"><span class="icon">🎒</span> 必备物品清单</div>
+  <div class="checklist">
+    <div class="check-group-title">📄 证件</div>
+    <div class="check-item"><input type="checkbox"> <span>身份证（全员）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>驾驶证（司机）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>船票订单（截图手机）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>车辆行驶证</span></div>
+    <div class="check-group-title">🚗 车辆</div>
+    <div class="check-item"><input type="checkbox"> <span>极氪7X充至95%+出门</span></div>
+    <div class="check-item"><input type="checkbox"> <span>车载充电线 + 充电转接头</span></div>
+    <div class="check-item"><input type="checkbox"> <span>手机支架 + 数据线</span></div>
+    <div class="check-item"><input type="checkbox"> <span>千斤顶 + 备胎检查（如有）</span></div>
+    <div class="check-group-title">👶 亲子</div>
+    <div class="check-item"><input type="checkbox"> <span>挖沙工具（小桶+铲子+模具）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>儿童防晒霜 SPF50+</span></div>
+    <div class="check-item"><input type="checkbox"> <span>驱蚊贴/驱蚊液（海边+椰林）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>换洗衣物（多套，孩子易湿）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>儿童墨镜 + 遮阳帽</span></div>
+    <div class="check-item"><input type="checkbox"> <span>常用药品（创可贴/晕船药/退烧药）</span></div>
+    <div class="check-group-title">🚀 火箭观礼</div>
+    <div class="check-item"><input type="checkbox"> <span>野餐垫 / 折叠椅</span></div>
+    <div class="check-item"><input type="checkbox"> <span>充电宝（满电，2万毫安以下）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>相机 + 三脚架（长曝光拍尾焰）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>干粮 + 瓶装水</span></div>
+    <div class="check-item"><input type="checkbox"> <span>防晒 + 驱蚊（椰林蚊虫极多）</span></div>
+    <div class="check-item"><input type="checkbox"> <span>火箭观礼联系客服确认发射信息</span></div>
+  </div>
+
+  <div class="footer">
+    <div class="tips">
+      💡 <strong>出发前7天：</strong>确认船票 · 预订文昌住宿 · 确认火箭发射信息<br>
+      💡 <strong>出发前1天：</strong>极氪满电 · 收拾行李 · 打印/截图所有订单<br>
+      💡 <strong>自驾高德地图记得缓存海南离线地图！</strong>
+    </div>
+    <p>🚀 祝旅途愉快，火箭发射顺利！</p>
+    <p style="margin-top:4px;">攻略生成于 2026.07.15 · 持续更新中</p>
+  </div>
+
+</div>
+
+<!-- FLOATING NAV -->
+<div class="float-nav">
+  <button class="float-btn" onclick="navTo('椰林1号观景台','110.7834','19.6485')" title="椰林1号观景台">🗺️</button>
+</div>
+
+<script>
+  // 高德地图唤起导航
+  // 逻辑：手机端优先尝试拉起高德App，失败则跳转Web版
+  function navTo(name, lng, lat) {
+    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    var encodedName = encodeURIComponent(name);
+    var encodedLng = encodeURIComponent(lng);
+    var encodedLat = encodeURIComponent(lat);
+
+    if (isMobile) {
+      // 方案1：直接用高德App导航scheme（iOS/Android通用）
+      // amap:// navi?poiname=名称&lat=纬度&lon=经度
+      var appUrl = 'amap://navi?sourceApplication=海南攻略&poiname=' + encodedName + '&lat=' + encodedLat + '&lon=' + encodedLng + '&dev=1';
+      // 方案2：高德Web版（兜底）
+      var webUrl = 'https://restapi.amap.com/v5/direction/walking?key=&origin=' + encodedLng + ',' + encodedLat + '&destination=' + encodedLng + ',' + encodedLat + '&showField=2';
+
+      // 直接跳转App
+      window.location.href = appUrl;
+
+      // 2秒后检测是否还在当前页（没跳成功），则打开Web版
+      setTimeout(function() {
+        // 利用visibilitychange判断是否切走了
+        document.addEventListener('visibilitychange', function onVisChange() {
+          if (document.visibilityState === 'hidden') {
+            // 切走了，说明App已拉起
+            document.removeEventListener('visibilitychange', onVisChange);
+          } else {
+            // 还在当前页，App没拉起来，打开Web版
+            document.removeEventListener('visibilitychange', onVisChange);
+            var webNavUrl = 'https://m.amap.com/navi?dest=' + encodedLng + ',' + encodedLat + '&destName=' + encodedName + '&key=&hideShadowBar=true';
+            window.location.href = webNavUrl;
+          }
+        });
+        // 加一个备用超时兜底
+        setTimeout(function() {
+          if (document.visibilityState === 'visible') {
+            var webNavUrl = 'https://m.amap.com/navi?dest=' + encodedLng + ',' + encodedLat + '&destName=' + encodedName + '&key=&hideShadowBar=true';
+            window.location.href = webNavUrl;
+          }
+        }, 2000);
+      }, 100);
+    } else {
+      // PC端：打开高德Web版
+      var webNavUrl = 'https://m.amap.com/navi?dest=' + encodedLng + ',' + encodedLat + '&destName=' + encodedName + '&key=&hideShadowBar=true';
+      window.open(webNavUrl, '_blank');
+    }
+  }
+
+  // 地图搜索（用于搜酒店、充电站）
+  function searchMap(keyword) {
+    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    var encoded = encodeURIComponent(keyword);
+    if (isMobile) {
+      // 手机上用高德App搜索
+      window.location.href = 'amap://keywordSearch?keywords=' + encoded;
+      setTimeout(function() {
+        setTimeout(function() {
+          if (document.visibilityState === 'visible') {
+            window.location.href = 'https://m.amap.com/search?query=' + encoded + '&key=';
+          }
+        }, 2000);
+      }, 100);
+    } else {
+      window.open('https://m.amap.com/search?query=' + encoded + '&key=', '_blank');
+    }
+  }
+
+  // Toast提示
+  function showToast(msg) {
+    var toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2500);
+  }
+</script>
+</body>
+</html>

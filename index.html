@@ -168,7 +168,7 @@
 
 <!-- 顶部链接条 -->
 <div style="background:#1a1a2e;padding:8px 16px;text-align:center;font-size:12px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
-  <a href="https://docs.qq.com/aio/DSWhPd0FscU9kZERV" target="_blank" style="color:#69f0ae;text-decoration:none;">📄 在线文档</a>
+  <a href="https://docs.qq.com/aio/DSU1aUXNqRFFsU1pr" target="_blank" style="color:#69f0ae;text-decoration:none;">📄 在线文档</a>
   <a href="https://github.com/hubingxiong-png/hainan-trip-2026" target="_blank" style="color:#888;text-decoration:none;">🔗 源码/GitHub</a>
 </div>
 
@@ -780,48 +780,31 @@
 <script>
   // 高德地图唤起导航
   // 逻辑：手机端优先尝试拉起高德App，失败则跳转Web版
+  // 高德地图导航（带地名+坐标双保险）
   function navTo(name, lng, lat) {
     var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    var encodedName = encodeURIComponent(name);
-    var encodedLng = encodeURIComponent(lng);
-    var encodedLat = encodeURIComponent(lat);
+    var n = encodeURIComponent(name);
 
     if (isMobile) {
-      // 方案1：直接用高德App导航scheme（iOS/Android通用）
-      // amap:// navi?poiname=名称&lat=纬度&lon=经度
-      var appUrl = 'amap://navi?sourceApplication=海南攻略&poiname=' + encodedName + '&lat=' + encodedLat + '&lon=' + encodedLng + '&dev=1';
-      // 方案2：高德Web版（兜底）
-      var webUrl = 'https://restapi.amap.com/v5/direction/walking?key=&origin=' + encodedLng + ',' + encodedLat + '&destination=' + encodedLng + ',' + encodedLat + '&showField=2';
+      // 【App导航】amap://navi 导航模式，带地名和坐标
+      // poiname=目的地名称，lat/lon=坐标，dev=1表示坐标来源为高德（已转火星坐标）
+      var appUrl = 'amap://navi?poiname=' + n + '&lat=' + lat + '&lon=' + lng + '&dev=1&src=webapp';
 
-      // 直接跳转App
+      // 【Web导航兜底】高德网页版导航
+      var webUrl = 'https://m.amap.com/navi?dest=' + lng + ',' + lat + '&destName=' + n + '&hideShadowBar=true';
+
+      // 尝试拉起高德App
       window.location.href = appUrl;
 
-      // 2秒后检测是否还在当前页（没跳成功），则打开Web版
-      setTimeout(function() {
-        // 利用visibilitychange判断是否切走了
-        document.addEventListener('visibilitychange', function onVisChange() {
-          if (document.visibilityState === 'hidden') {
-            // 切走了，说明App已拉起
-            document.removeEventListener('visibilitychange', onVisChange);
-          } else {
-            // 还在当前页，App没拉起来，打开Web版
-            document.removeEventListener('visibilitychange', onVisChange);
-            var webNavUrl = 'https://m.amap.com/navi?dest=' + encodedLng + ',' + encodedLat + '&destName=' + encodedName + '&key=&hideShadowBar=true';
-            window.location.href = webNavUrl;
-          }
-        });
-        // 加一个备用超时兜底
-        setTimeout(function() {
-          if (document.visibilityState === 'visible') {
-            var webNavUrl = 'https://m.amap.com/navi?dest=' + encodedLng + ',' + encodedLat + '&destName=' + encodedName + '&key=&hideShadowBar=true';
-            window.location.href = webNavUrl;
-          }
-        }, 2000);
-      }, 100);
+      // 3秒后若仍在当前页面，说明App未拉起，切Web版
+      setTimeout(function () {
+        if (document.visibilityState === 'visible') {
+          window.location.href = webUrl;
+        }
+      }, 3000);
     } else {
-      // PC端：打开高德Web版
-      var webNavUrl = 'https://m.amap.com/navi?dest=' + encodedLng + ',' + encodedLat + '&destName=' + encodedName + '&key=&hideShadowBar=true';
-      window.open(webNavUrl, '_blank');
+      // PC端直接打开Web版
+      window.open('https://m.amap.com/navi?dest=' + lng + ',' + lat + '&destName=' + n, '_blank');
     }
   }
 
